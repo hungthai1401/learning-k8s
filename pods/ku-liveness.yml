@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-unhealthy
+  labels:
+    target: pod
+spec:
+  containers:
+    - name: kubia-unhealthy
+      image: luksa/kubia-unhealthy
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 8080
