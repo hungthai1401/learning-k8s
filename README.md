@@ -1,3 +1,27 @@
+#### Setup
+
+##### Mac Silicon
+
+```ruby
+config.vm.box = "bento/ubuntu-22.04"
+
+config.vm.provider "vmware_desktop" do |vb|
+   vb.memory = 2048
+   vb.cpus = 2
+end
+```
+
+##### Mac Intel
+
+```ruby
+config.vm.box = "ubuntu/focal64"
+
+config.vm.provider "virtualbox" do |vb|
+   vb.memory = 2048
+   vb.cpus = 2
+end
+```
+
 #### Initialize the Kubernetes Master Node
 
 ```shell

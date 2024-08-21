@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/focal64"
-  
-  config.vm.provider "virtualbox" do |vb|
+  config.vm.box = "bento/ubuntu-22.04"
+     
+  config.vm.provider "vmware_desktop" do |vb|
     vb.memory = 2048
     vb.cpus = 2
   end
@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "master" do |master|
     master.vm.network "private_network", ip: "192.168.50.10"
     master.vm.hostname = "master"
-    master.vm.provider "virtualbox" do |vb|
+    master.vm.provider "vmware_desktop" do |vb|
       vb.name = "master"
     end
     master.vm.provision "shell", path: "./scripts/bootstrap.sh"
@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "node-#{i}" do |node|
       node.vm.network "private_network", ip: "192.168.50.#{10 + i}"
       node.vm.hostname = "node-#{i}"
-      node.vm.provider "virtualbox" do |vb|
+      node.vm.provider "vmware_desktop" do |vb|
         vb.name = "node-#{i}"
       end
       node.vm.provision "shell", path: "./scripts/bootstrap.sh"
