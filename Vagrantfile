@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
     master.vm.network "private_network", ip: "192.168.50.10"
     master.vm.hostname = "master"
     master.vm.provision "shell", path: "./scripts/bootstrap.sh"
+    master.vm.synced_folder "definitions", "/var/definitions"
   end
 
   (1..2).each do |i|
