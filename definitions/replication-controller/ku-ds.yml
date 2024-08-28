@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ku-ds
+  labels:
+    target: rc
+spec:
+  selector:
+    matchLabels:
+      app: ku-ds
+  template:
+    metadata:
+      labels:
+        app: ku-ds
+    spec:
+      containers:
+        - name: kubia
+          image: luksa/ssd-monitor

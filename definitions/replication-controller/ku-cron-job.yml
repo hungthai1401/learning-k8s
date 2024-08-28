@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ku-cron-job
+  labels:
+    target: rc
+spec:
+  schedule: '*/3 * * * *'
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ku-cron-job
+            target: rc
+        spec:
+          containers:
+            - name: kubia
+              image: luksa/batch-job
+          restartPolicy: OnFailure

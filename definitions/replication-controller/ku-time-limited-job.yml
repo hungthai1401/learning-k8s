@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ku-time-limited-job
+  labels:
+    target: rc
+spec:
+  activeDeadlineSeconds: 30
+  template:
+    metadata:
+      labels:
+        app: ku-time-limited-job
+        target: rc
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: ku-time-limited-job
+          image: luksa/batch-job

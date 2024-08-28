@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: ku-rs-expression
+  labels:
+    target: rc
+spec:
+  replicas: 2
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - ku
+      - key: target
+        operator: In
+        values:
+          - rc
+  template:
+    metadata:
+      labels:
+        app: ku
+        target: rc
+    spec:
+      containers:
+        - name: kubia
+          image: luksa/kubia
+          ports:
+            - containerPort: 8080
