@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ku-external-name-service
+  labels:
+    target: svc
+spec:
+  type: ExternalName
+  externalName: google.com
