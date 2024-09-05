@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ku-backoff
+  labels:
+    target: job
+spec:
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        target: job
+    spec:
+      containers:
+        - name: congld
+          image: busybox
+          command: ['bash']
+          args:
+            - -c
+            - echo "Hello world!" && sleep 20 && exit 1
+      restartPolicy: OnFailure

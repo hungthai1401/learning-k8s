@@ -3,16 +3,16 @@ kind: CronJob
 metadata:
   name: ku-cron-job
   labels:
-    target: rc
+    target: job
 spec:
-  schedule: '*/3 * * * *'
+  schedule: '* * * * *'
   jobTemplate:
     spec:
       template:
         metadata:
           labels:
             app: ku-cron-job
-            target: rc
+            target: job
         spec:
           containers:
             - name: kubia

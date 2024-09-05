@@ -1,18 +1,19 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ku-multi-completion-job
+  name: ku-multi-completion-parallel-job
   labels:
-    target: rc
+    target: job
 spec:
   completions: 5
+  parallelism: 2
   template:
     metadata:
       labels:
-        app: ku-multi-completion-job
-        target: rc
+        app: ku-multi-completion-parallel-job
+        target: job
     spec:
       restartPolicy: OnFailure
       containers:
-        - name: ku-multi-completion-job
+        - name: ku-multi-completion-parallel-job
           image: luksa/batch-job
