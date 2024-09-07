@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: ku-rs
+  name: ku-lb-rs
   labels:
     target: svc
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ku
+      app: ku-lb
       target: svc
   template:
     metadata:
       labels:
-        app: ku
+        app: ku-lb
         target: svc
     spec:
       containers:
@@ -34,5 +34,5 @@ spec:
     - port: 80
       targetPort: 8080
   selector:
-    app: ku
+    app: ku-lb
     target: svc
