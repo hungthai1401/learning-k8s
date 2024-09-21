@@ -1,25 +1,13 @@
-#### Setup
+## Setup
 
-##### Mac Silicon
+### Mac Silicon
 
-```ruby
-config.vm.box = "bento/ubuntu-22.04"
+Thanks to https://github.com/techiescamp/vagrant-kubeadm-mac-silicon
 
-config.vm.provider "vmware_desktop" do |vb|
-   vb.memory = 2048
-   vb.cpus = 2
-end
-```
+### Mac Intel
 
-##### Mac Intel
-
-```ruby
-config.vm.box = "ubuntu/focal64"
-
-config.vm.provider "virtualbox" do |vb|
-   vb.memory = 2048
-   vb.cpus = 2
-end
+```shell
+mv Vagrantfile.Intel Vagrantfile
 ```
 
 #### Initialize the Kubernetes Master Node
@@ -39,7 +27,7 @@ sudo systemctl restart kubelet
 #### Run in workers
 
 ```shell
-kubeadm join 192.168.50.10:6443 --token 481kqf.mhv6um6q4wspsdzr --discovery-token-ca-cert-hash sha256:44e7b5b1cda9ab75e7b08719a3e342d7c9868a90b8cd04252479a0f014e5c1fd
+sudo kubeadm join 192.168.50.10:6443 --token [TOKEN] --discovery-token-ca-cert-hash [HASH]
 ```
 
 #### Setting Up kubectl on Host machine
