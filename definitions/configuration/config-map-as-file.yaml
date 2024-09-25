@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config-map-as-file
+  labels:
+    target: conf
+data:
+  marvel.json: |
+    {
+      "name": "IRON"
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-config-map-as-file-pod
+  labels:
+    target: conf
+spec:
+  containers:
+  - name: demo-config-map-as-file-container
+    image: busybox
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: marvel-volume
+      mountPath: /etc/config
+  volumes:
+  - name: marvel-volume
+    configMap:
+      name: demo-config-map-as-file

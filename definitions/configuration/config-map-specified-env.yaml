@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config-map-specified-env
+  labels:
+    target: conf
+data:
+  NAME: "IRON"
+  AGE: "40"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-config-map-specified-env-pod
+  labels:
+    target: conf
+spec:
+  containers:
+  - name: demo-config-map-specified-env-container
+    image: busybox
+    command: ["/bin/sh", "-c", "env"]
+    env:
+    - name: CONFIGMAP_USERNAME
+      valueFrom:
+        configMapKeyRef:
+          name: demo-config-map-specified-env
+          key: NAME
