@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-demo
+spec:
+  containers:
+  - name: busybox1
+    image: busybox
+    command: ['sh', '-c', 'while true; do date >> /data/timestamps.txt; sleep 5; done']
+    volumeMounts:
+    - mountPath: /data
+      name: emptydir-volume
+  - name: busybox2
+    image: busybox
+    command: ['sh', '-c', 'tail -f /shared-data/timestamps.txt']
+    volumeMounts:
+    - mountPath: /shared-data
+      name: emptydir-volume
+  volumes:
+  - name: emptydir-volume
+    emptyDir: {}
